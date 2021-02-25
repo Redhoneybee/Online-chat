@@ -5,4 +5,8 @@ module.exports = (app) => {
 
     app.use(express.static('public'));
 
+    app.use('/', (req, res) => {
+        res.render('index');
+    })
+
 }
