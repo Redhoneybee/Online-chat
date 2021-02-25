@@ -21,6 +21,7 @@ module.exports = {
 
     // routes
     routes: {
+        index: '/',
         auth: '/auth'
     },
 }

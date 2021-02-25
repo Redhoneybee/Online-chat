@@ -8,8 +8,13 @@ module.exports = (passport) => {
         clientID: config.oauths.google.id,
         clientSecret: config.oauths.google.secret,
         callbackURL: config.oauths.google.callback
-    }, (accessToekn, refreshToken, profile, cb) => {
+    }, (accessToken, refreshToken, profile, done) => {
 
-        return cb(null, profile);
+        const user = {
+            accessToken,
+            refreshToken,
+            profile
+        }
+        return done(null, user);
     }));
 }

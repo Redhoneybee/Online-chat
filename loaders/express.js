@@ -10,8 +10,9 @@ const config = require('../config');
 
 // routes
 const authRouter = require('../routes/auth');
+const indexRouter = require('../routes/index');
 
-const { auth } = config.routes;
+const { index, auth } = config.routes;
 
 module.exports = (app) => {
     app.set('view engine', 'ejs');
@@ -34,10 +35,5 @@ module.exports = (app) => {
 
 
     app.use(auth, authRouter);
-
-
-    app.use('/', (req, res) => {
-        res.render('index');
-    })
-
+    app.use(index, indexRouter);
 }
