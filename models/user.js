@@ -1,12 +1,12 @@
-const mongoose, { Schema } = require('mongoose');
+const mongoose = require('mongoose');
 
-const User = new Schema({
+const User = new mongoose.Schema({
     username: {
         type: String,
         required: true,
         index: true
     },
-    oauthpath: {
+    oauthprovider: {
         type: String,
         required: true
     },
@@ -14,6 +14,9 @@ const User = new Schema({
         type: String,
         required: true,
         unique: true
+    },
+    photo: {
+        type: String
     },
     role: {
         type: String,
