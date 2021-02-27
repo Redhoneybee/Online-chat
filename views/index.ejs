@@ -22,31 +22,21 @@
         background-color: #28527a;
     }
 </style>
-<script>
-    const user = "<%= user %>";
 
-    const userObject = JSON.parse(user.replace(/&#34;/gi, "\""));
-
-</script>
 
 <body>
     <div class="container flex">
+
         <div class="box_wrap">
+            <% if(locals.user) { %>
+                <%- include('login/index') %>
+                    <% }else{ %>
+                        <a id="login" class="contents_box flex" href="/auth/google">
 
-            <% if(user) { %>
-                <a id="login" class="contents_box flex">
-                    <span>방 생성</span>
-                </a>
-                <a id="login" class="contents_box flex">
-                    <span>방 참여</span>
-                </a>
-                <% }else{ %>
-                    <a id="login" class="contents_box flex" href="/auth/google">
+                            <span>구글 로그인</span>
+                        </a>
 
-                        <span>구글 로그인</span>
-                    </a>
-
-                    <% } %>
+                        <% } %>
         </div>
     </div>
 </body>
