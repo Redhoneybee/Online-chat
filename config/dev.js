@@ -9,6 +9,9 @@ module.exports = {
         session: process.env.SESSION_SECRET
     },
 
+
+    //  mongo db url
+    db_url: `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.bd9t4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
     // Oauth info
     oauths: {
         // google 
