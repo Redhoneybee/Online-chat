@@ -4,12 +4,14 @@ const AuthService = require('../services/authService')();
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     if (req.user) {
-
         //    user 
-        AuthService.setUser(req.user);
+        // AuthService.setUser(req.user);
+        await AuthService.setUserInDB(req.user);
         const user = JSON.stringify(AuthService.getUser());
+
+        console.log(user);
         return res.render('index', { user });
     } else {
         //   user isn't...
