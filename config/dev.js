@@ -12,6 +12,7 @@ module.exports = {
 
     //  mongo db url
     db_url: `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.bd9t4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+
     // Oauth info
     oauths: {
         // google 
@@ -25,7 +26,8 @@ module.exports = {
     // routes
     routes: {
         index: '/',
-        auth: '/auth'
+        auth: '/auth',
+        room: '/room'
     },
 }
 

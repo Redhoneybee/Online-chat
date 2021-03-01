@@ -9,10 +9,11 @@ const passportLoader = require('./passport');
 const config = require('../config');
 
 // routes
-const authRouter = require('../routes/auth');
 const indexRouter = require('../routes/index');
+const authRouter = require('../routes/auth');
+const roomRouter = require('../routes/room');
 
-const { index, auth } = config.routes;
+const { index, auth, room } = config.routes;
 
 module.exports = (app) => {
     app.set('view engine', 'ejs');
@@ -20,6 +21,9 @@ module.exports = (app) => {
     app.use(express.static('public'));
 
     app.use(cors({ origin: "http://localhost:/5000" }));
+
+    // post 요청 받기위해 사용
+    app.use(express.json());
 
     app.use(cookieParser(config.secrets.cookie));
 
@@ -36,4 +40,5 @@ module.exports = (app) => {
 
     app.use(auth, authRouter);
     app.use(index, indexRouter);
+    app.use(room, roomRouter);
 }
