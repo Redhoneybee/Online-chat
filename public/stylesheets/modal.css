@@ -1,0 +1,138 @@
+.modal_wrap{
+    position : absolute;
+    top : 0;
+    left : 0;
+    width : 100vw;
+    height : 100vh;
+    z-index : 3;
+    pointer-events: none;
+}
+
+.modal_wrap .mask{
+    position : absolute;
+    width : 100%;
+    height : 100%;
+    background-color : rgba(0, 0, 0, 0.4);
+    z-index : 2;
+    opacity : 0;
+}
+
+.modal_wrap.visible{
+    pointer-events : initial;
+}
+.modal_wrap.visible .mask{
+    opacity : 1;
+}
+
+.modal_wrap .modal_contents{
+    position : relative;
+    background-color : white;
+    width : 450px;
+    height : 300px;
+    border : 1px solid #28527a;
+    opacity : 0;
+    z-index : 3;
+
+    -moz-transform : scale(0.7);
+    -ms-transform : scale(0.7);
+    -webkit-transform : scale(0.7);
+    transform : scale(0.7);
+    
+    -moz-transition : all 0.3s ease-in;
+    -ms-transition : all 0.3s ease-in;
+    -webkit-transition : all 0.3s ease-in;
+    transition : all 0.3s ease-in;
+}
+
+.modal_wrap.visible .modal_contents{
+    opacity : 1;
+    -moz-transform : scale(1);
+    -ms-transform : scale(1);
+    -webkit-transform : scale(1);
+    transform : scale(1);
+}
+
+.modal_contents .modal_contents_wrap{
+    position : relative;
+    padding : 20px;
+    width : calc(100% - 40px);
+    height : calc(100% - 40px);
+}
+
+.modal_contents_wrap .modal_title{
+    width : 100%;
+    text-align: center;
+}
+.modal_title span {
+    font-size : 24px;
+    font-weight : 1000;
+}
+
+.modal_contents_wrap .active_form{
+    margin-top : 20px;
+    padding : 20px;
+    display : none;
+}
+
+
+.textbox{
+    position : relative;
+}
+
+.textbox label {
+    position: absolute;
+    padding : 5px 10px;
+    color : rgba(0, 0, 0, 0.2);
+    font-weight : 900;
+    pointer-events : none;
+    opacity : 1;
+
+    -moz-transition : all 0.3s linear;
+    -ms-transition : all 0.3s linear;
+    -webkit-transition : all 0.3s linear;
+    transition : all 0.3s linear;
+}
+.textbox label.visible{
+    opacity : 0;
+}
+
+.textbox input {
+    padding : 5px 10px;
+    margin-bottom : 15px;
+    border : 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.textbox input:focus{
+    outline : none;
+}
+
+
+
+.textbox .fa-check-circle{
+    font-size : 18px;
+    color : green;
+}
+
+.textbox .fa-times-circle{
+    font-size : 18px;
+    color : red;
+}
+
+.modal_contents_wrap .btn_wrap {
+    padding : 10px;
+}
+
+.btn_wrap button:disabled{
+    background-color : rgba(40, 82, 122, 0.5);
+    cursor :initial;
+}
+
+.btn.action_btn{
+    color : white;
+    background-color : #28527a;
+}
+
+
+.modal_contents_wrap .active_form.active{
+    display : block;
+}

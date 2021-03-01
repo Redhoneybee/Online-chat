@@ -32,4 +32,5 @@
 .contents_box span {
     font-size : 24px;
     font-weight: 600;
+    pointer-events: none;
 }

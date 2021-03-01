@@ -41,3 +41,13 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+.btn{
+    padding : 5px 10px;
+    border : 1px solid rgba(0, 0, 0, 0.2);
+    font-weight : bold;
+    cursor : pointer;
+}
+
+.btn:focus{
+    outline : none;
+}
