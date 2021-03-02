@@ -88,18 +88,24 @@ const focusoutInput = (e) => {
     if (!value) label.classList.remove(VISIBLE);
 }
 
-
-const eraseModal = (e) => {
-    e.preventDefault();
-
-    document.querySelector('.modal_wrap').classList.remove(VISIBLE);
-    inputs.forEach(input => input.value = "");
-    document.querySelectorAll('.textbox_label').forEach(label => label.classList.remove(VISIBLE));
-
+const initRealTimer = () => {
     if (realtimeId !== undefined) {
         clearInterval(realtimeId);
         realtimeId = undefined;
     }
+}
+
+const initInputs = () => {
+    document.querySelector('.modal_wrap').classList.remove(VISIBLE);
+    inputs.forEach(input => input.value = "");
+    document.querySelectorAll('.textbox_label').forEach(label => label.classList.remove(VISIBLE));
+}
+
+const eraseModal = (e) => {
+    e.preventDefault();
+
+    initInputs();
+    initRealTimer();
 }
 
 
