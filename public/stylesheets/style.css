@@ -1,11 +1,3 @@
-.flex{
-    display : flex;
-    flex-direction : column;
-    justify-content: center;
-    align-items: center;
-}
-
-
 .box_wrap{
     display : flex;
     flex-direction : row;
