@@ -5,8 +5,8 @@ const modal_title = {
 
 const create = document.getElementById(CREATE);
 const attend = document.getElementById(ATTEND);
-const inputs = document.querySelectorAll('input');
 
+const inputs = document.querySelectorAll('input');
 const closes = document.querySelectorAll('#close');
 
 //  실시간 체크 
@@ -15,6 +15,8 @@ let realtimeId = undefined;
 const passwordInput = document.querySelector('#room_create .password');
 const passwordInvalidInput = document.querySelector('.password_invalid');
 const passwordChecked = document.querySelector('.password_checked');
+
+const roomOK = document.getElementById('room_OK');
 
 const changeActionBtn = (id, flag) => {
     const btn = document.querySelector(`#room_${id} .action_btn`);
@@ -104,13 +106,26 @@ const initInputs = () => {
 const eraseModal = (e) => {
     e.preventDefault();
 
+    const modalID = e.target.parentNode.parentNode.parentNode.getAttribute('id');
+
+    if (modalID === "room_OK") {
+        window.location.href = "/";
+        initRealTimer();
+    }
     initInputs();
     initRealTimer();
 }
 
 
-create.addEventListener('click', drawModal);
-attend.addEventListener('click', drawModal);
-inputs.forEach(input => input.addEventListener('focus', focusInput));
-inputs.forEach(input => input.addEventListener('focusout', focusoutInput));
-closes.forEach(close => close.addEventListener('click', eraseModal));
+if (create) create.addEventListener('click', drawModal);
+if (attend) attend.addEventListener('click', drawModal);
+
+if (inputs) inputs.forEach(input => input.addEventListener('focus', focusInput));
+if (inputs) inputs.forEach(input => input.addEventListener('focusout', focusoutInput));
+if (closes) closes.forEach(close => close.addEventListener('click', eraseModal));
+
+if (roomOK) {
+    (function (id) {
+        realtimeId = setInterval(() => checkedInput(id), 100)
+    })(OK);
+}
