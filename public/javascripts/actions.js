@@ -1,6 +1,10 @@
 const actionCreateBtn = document.getElementById('action_create');
 const actionAttendBtn = document.getElementById('action_attend');
 const actionOKBtn = document.getElementById('action_OK')
+const actionCopyBtn = document.getElementById("action_copy");
+const actionListBtn = document.getElementById("action_list");
+const actionListCloseBtn = document.getElementById('action_list_close');
+
 const createAction = async (e) => {
     e.preventDefault();
 
@@ -36,13 +40,31 @@ const okAction = async (e) => {
     if (data) {
         const { message } = data;
         if (message === RES_OK_SUCCESSED) {
+            console.log(message);
             initInputs();
             initRealTimer();
+            startOnlineChat();
         }
     }
 
 }
 
+const roomCodeCopyAction = () => document.execCommand('copy');
+const sideListViewAction = (e) => {
+    e.preventDefault();
+
+    document.querySelector('.header').classList.remove(VISIBLE);
+    setTimeout(() => document.querySelector('.users_list').classList.add(VISIBLE), 200);
+}
+const sideListCloseAction = (e) => {
+    e.preventDefault();
+    document.querySelector('.users_list').classList.remove(VISIBLE);
+    setTimeout(() => document.querySelector('.header').classList.add(VISIBLE), 200);
+}
+
 if (actionCreateBtn) actionCreateBtn.addEventListener('click', createAction);
 if (actionAttendBtn) actionAttendBtn.addEventListener('click', attendAction);
 if (actionOKBtn) actionOKBtn.addEventListener('click', okAction);
+if (actionCopyBtn) actionCopyBtn.addEventListener('click', roomCodeCopyAction);
+if (actionListBtn) actionListBtn.addEventListener('click', sideListViewAction);
+if (actionListCloseBtn) actionListCloseBtn.addEventListener('click', sideListCloseAction);
