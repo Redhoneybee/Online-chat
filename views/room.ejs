@@ -36,13 +36,15 @@
     <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
     <script>
         const roomCode = "<%= roomCode %>";
+        const owner = "<%= owner.id %>";
+        const user = "<%= user %>"
     </script>
     <title>Online Chat</title>
 </head>
 
 <body>
     <div class=" container flex">
-        <% if(locals.owner && locals.user && JSON.stringify(owner) !=JSON.stringify(user)){ %>
+        <% if(locals.owner && locals.user && JSON.stringify(owner.id) !=JSON.stringify(user)){ %>
             <div class="modal_wrap flex visible">
                 <div class="mask"></div>
                 <div class="modal_contents">
@@ -76,21 +78,43 @@
                     <div class="header_wrap">
                         <div class="room_code">
                             <span class="string">
-                                bdd1a2a9-f671-4f9b-a81e-442eb1e03e85
+                                <% if(locals.roomCode) { %>
+                                    <%= roomCode %>
+                                        <% } %>
                             </span>
-                            <button class="btn copy_btn">
+                            <button id="action_copy" class="btn copy_btn">
                                 <span><i class="far fa-clone"></i></span>
                             </button>
                         </div>
 
-                        <button class="btn list_btn">
+                        <button id="action_list" class="btn list_btn">
                             <span><i class="far fa-address-book"></i></span>
                         </button>
                     </div>
                 </header>
-
+                <script>
+                    setTimeout(() => document.querySelector('.header').classList.add('visible'), 200);
+                </script>
                 <div class="videos_wrap">
                 </div>
+                <nav class="users_list">
+                    <div class="list_header">
+                        <div class="list_header_wrap">
+                            <button id="action_list_close" class="btn list_close_btn">
+                                <span>접기</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="list_body">
+                        <ul class="users">
+                            <% if(locals.owner) { %>
+                                <li id="owner" class="user">
+                                    <%=owner.name%>
+                                </li>
+                                <% } %>
+                        </ul>
+                    </div>
+                </nav>
     </div>
 </body>
 <script src="../javascripts/types.js"></script>

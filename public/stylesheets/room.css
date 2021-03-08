@@ -3,11 +3,29 @@ header.header{
     top : 0;
     right : 0;
     left : 0;
-
     width : 100%;
     height : 50px;
     background-color : white;
+    -ms-transform : translateY(-80px);
+    -moz-transform : translateY(-80px);
+    -webkit-transform : translateY(-80px);
+    transform : translateY(-80px);
+    -ms-transition : all 0.3s ease-in;
+    -moz-transition : all 0.3s ease-in;
+    -webkit-transition : all 0.3s ease-in;
+    transition : all 0.3s ease-in;
+    pointer-events : none;
 }
+
+header.header.visible{
+    -ms-transform : translateY(0);
+    -moz-transform : translateY(0);
+    -webkit-transform : translateY(0);
+    transform : translateY(0);
+    pointer-events : initial;
+}
+
+
 
 header.header .header_wrap {
     display : flex;
@@ -34,6 +52,70 @@ header.header .header_wrap {
 .list_btn{
     font-size : 24px;
 }
+
+nav.users_list{
+    position : fixed;
+    top : 0; 
+    right : 0; 
+    width : 240px;
+    height : 100%;
+    background-color : white;
+    -ms-transform : translateX(300px);
+    -moz-transform : translateX(300px);
+    -webkit-transform : translateX(300px);
+    transform : translateX(300px);
+    -ms-transition : all 0.5s ease-in;
+    -moz-transition : all 0.5s ease-in;
+    -webkit-transition : all 0.5s ease-in;
+    transition : all 0.5s ease-in;
+    pointer-events: none;
+}
+
+nav.users_list.visible{
+    -ms-transform : translateX(0);
+    -moz-transform : translateX(0);
+    -webkit-transform : translateX(0);
+    transform : translateX(0);
+    pointer-events : initial;
+}
+
+.list_header .list_header_wrap{
+    padding : 20px;
+}
+
+.list_header_wrap .list_close_btn{
+    padding : 10px 15px;
+    border-radius : 10px;
+    font-size : 18px;
+    color : white;
+    background: #8e9eab;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #eef2f3, #8e9eab);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border : none;
+    cursor : pointer;
+}
+
+nav.user_list .list_body{
+    position : relative;
+    box-sizing : border-box;
+    width : 100%;
+    height : 100%;
+}
+
+.list_body ul.users{
+    border-top : 1px solid gray;
+    width : 100%;
+}
+ul.users li.user{
+    padding : 10px 15px;
+}
+ul.users li:nth-of-type(2n-1){
+    background-color :white;
+}
+ul.users li:nth-of-type(2n){
+    background-color : rgba(0, 0, 0, 0.1);
+}
+
 
 
 .videos_wrap{

@@ -47,6 +47,9 @@ table {
     font-weight : bold;
     cursor : pointer;
 }
+.btn span{
+	pointer-events : none;
+}
 
 .btn:focus{
     outline : none;
