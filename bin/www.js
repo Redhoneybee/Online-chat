@@ -9,13 +9,12 @@ const startServer = async () => {
 
     const server = createServer(app);
 
+    // socket.io
+    require('../loaders/socketio')(server);
+
     // listen
     server.listen(config.port, () => {
         console.log(`listen...${config.port}`);
     });
-
-    return server
 }
-
-const server = startServer();
-
+startServer();
