@@ -33,16 +33,22 @@ const Room = new mongoose.Schema({
 });
 
 
-Room.methods.addUser = function (userId) {
-    console.log(this);
-    console.log(userId);
-    this.users.push({ userId })
+Room.methods.addUser = function (_userId) {
+    this.users.push({ userId: _userId })
     return this.save();
 }
 
-Room.methods.removeUser = function (userId) {
-    this.users.pull({ userId });
+Room.methods.removeUser = function (_userId) {
+    this.users.pull({ userId: _userId });
     return this.save();
+}
+
+Room.methods.checkedAlreadyUser = function (_userId) {
+    for (user of this.users) {
+        const { userId } = user;
+        if (userId === _userId) return true;
+    }
+    return false;
 }
 
 
