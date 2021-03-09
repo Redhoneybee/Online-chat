@@ -25,6 +25,10 @@ class roomService {
     getRoom = () => this.#room;
     getRoomCode = () => this.#room.roomCode;
 
+
+    // is...
+    isRoom = () => this.#room ? true : false;
+
     static isValiedPassword(password, compare) {
         if (!password || !compare) return false;
         else if (typeof password !== "string" || typeof compare !== "string") return false;
@@ -58,9 +62,7 @@ class roomService {
 
     async searchInDB(roomCode) {
         const AuthServiceInstance = new AuthService();
-        console.log(typeof roomCode, roomCode);
         const room = await RoomModel.findOne({ roomCode });
-        console.log(room);
         if (!room) return false;
         else this.setRoom(room);
 
@@ -71,6 +73,36 @@ class roomService {
 
         return true;
     };
+
+
+    async insertUserInDB(userId) {
+        if (this.isRoom()) {
+            // room is...
+            const room = this.#room;
+
+            await room.addUser(userId);
+
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+
+    async removeUserInDB(userId) {
+        if (this.isRoom()) {
+            // room is...
+
+            const room = this.#room;
+
+            await room.removeUser(userId);
+
+            return true;
+
+        } else {
+            return false;
+        }
+    }
 }
 
 module.exports = roomService;
