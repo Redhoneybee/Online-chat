@@ -1,12 +1,7 @@
 const express = require('express');
 
-const RoomModel = require('../models/room');
-const UserModel = require('../models/user');
-
 const AuthService = require('../services/authService');
 const RoomService = require('../services/roomService');
-
-const argon2 = require('argon2');
 
 const router = express.Router();
 
@@ -49,7 +44,6 @@ router.post('/create', async (req, res, next) => {
 });
 
 router.get('/attend', async (req, res) => {
-    console.log(req.query);
     const { roomCode } = req.query;
 
     const RoomServiceInstance = new RoomService();
@@ -75,9 +69,12 @@ router.get('/:roomCode', async (req, res) => {
     const usersearchRet = await AuthServiceInstance.searchOauthInDB(provider, oauthId);
 
     if (!roomsearchRet || !usersearchRet) return res.status(204).redirect('/');
+
+    const owner = RoomServiceInstance.getOwner();
+
     const msg = {
         roomCode: RoomServiceInstance.getRoomCode(),
-        owner: RoomServiceInstance.getOwner()._id,
+        owner: owner._id,
         user: AuthServiceInstance.getUser()._id
     };
     return res.status(200).render('room', msg);
@@ -89,7 +86,7 @@ router.post('/:roomCode/OK', async (req, res) => {
     const { roomCode } = req.params;
     const { password } = req.body;
 
-    const RoomServiceInstance = new RoomServiceInstance();
+    const RoomServiceInstance = new RoomService();
 
     const result = await RoomServiceInstance.searchInDB(roomCode);
 
@@ -97,8 +94,6 @@ router.post('/:roomCode/OK', async (req, res) => {
         // room is...
 
         const isValid = await RoomServiceInstance.isValidNotOwner(password);
-
-        console.log(isValid);
 
         if (isValid) {
             return res.status(200).json({ message: "res_ok_successed" });
@@ -109,6 +104,47 @@ router.post('/:roomCode/OK', async (req, res) => {
         // room isn't...   
         return res.status(400).json({ message: "res_ok_not_found" });
     }
+});
+
+router.get('/:roomCode/allusers', async (req, res) => {
+    const { roomCode } = req.params;
+    const RoomServiceInstance = new RoomService();
+
+    const roomsearchRet = await RoomServiceInstance.searchInDB(roomCode);
+
+    if (roomsearchRet) {
+        const users = RoomServiceInstance.getUsers();
+
+        if (users) {
+            const AuthServiceInstance = new AuthService();
+
+            const usersObj = [];
+            for (user of users) {
+                const { userId } = user;
+
+                const usersearchRet = await AuthServiceInstance.searchIdInDB(userId);
+
+                if (usersearchRet) {
+                    // found user 
+                    const user = AuthServiceInstance.getUser();
+
+                    const obj = {
+                        id: user._id,
+                        username: user.username,
+                        photo: user.photo
+                    };
+                    usersObj.push(obj);
+                } else {
+                    // couldn't find user 
+                }
+            }
+            return res.json({ users: usersObj });
+
+        }
+    } else {
+        throw new Error("Couldn't find room");
+    }
+
 });
 
 module.exports = router;

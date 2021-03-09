@@ -7,6 +7,7 @@ const argon2 = require('argon2');
 const RoomModel = require('../models/room');
 
 class roomService {
+
     #owner;
     #room;
 
@@ -24,7 +25,7 @@ class roomService {
     }
     getRoom = () => this.#room;
     getRoomCode = () => this.#room.roomCode;
-
+    getUsers = () => this.#room.users;
 
     // is...
     isRoom = () => this.#room ? true : false;
@@ -75,6 +76,20 @@ class roomService {
     };
 
 
+    // true : already or not found room, false ; not already
+    async checkedAlreadyUser(userId) {
+        if (this.isRoom()) {
+            // room is...
+            const room = this.#room;
+            console.log(userId);
+            const ret = await room.checkedAlreadyUser(userId);
+
+            return ret;
+        } else {
+            return true;
+        }
+    }
+
     async insertUserInDB(userId) {
         if (this.isRoom()) {
             // room is...
@@ -102,7 +117,9 @@ class roomService {
         } else {
             return false;
         }
-    }
+    };
+
+
 }
 
 module.exports = roomService;
